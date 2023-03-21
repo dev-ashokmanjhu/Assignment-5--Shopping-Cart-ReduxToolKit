@@ -5,16 +5,16 @@ import { cartActions } from "../../store/cartSlice";
 
 const Product = (props) => {
   const dispatch = useDispatch();
-  // getting data from context
+  // getting data from redux store
   const cartRedux = useSelector((state) => state.cart);
   // fixed price for two decimal numbers
   const price = `$${props.price.toFixed(2)}`;
-  // function for adding item to context
+  // function for adding item to redux store
   const productIndex = cartRedux.items.findIndex(
     (item) => item.id === props.id
   );
   const product = cartRedux.items[productIndex];
-  // it get item quantity from function props and send data of props product to context
+  // it get item quantity from function props and send data of props product to redux store
   const addToCartHandler = (quantity) => {
     dispatch(
       cartActions.updateCartItem({

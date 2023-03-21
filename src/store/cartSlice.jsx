@@ -104,6 +104,10 @@ const cartSlice = createSlice({
         cartIsValid: true,
       };
     },
+    removeCartItem(state, action) {
+      const id = action.payload;
+      state.items = state.items.filter((item) => item.id !== id);
+    },
     removeFromCart(state, action) {
       const id = action.payload;
       // checking item already exist or not in the cart behalf of it add item in cart

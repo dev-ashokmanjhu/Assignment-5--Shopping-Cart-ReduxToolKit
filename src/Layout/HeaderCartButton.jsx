@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import CartIcon from "../Cart/CartIcon";
-// import CartContext from "../store/cart-context";
 import classes from "./HeaderCartButton.module.css";
 
 const HeaderCartButton = (props) => {
   // state for animate button on adding or removing cart items
   const [btnIsHighlighted, setBtnIsHighlighted] = useState(false);
-  // getting context data for showing totalcartitem in badge
+  // getting redux cart data for showing totalcartitem in badge
   const cartRedux = useSelector((state) => state.cart);
-  // destructureing items from context
+  // destructureing items from redux cart
   const { items, cartIsValid } = cartRedux;
   // use reduce to get total number of cart items
   const numberOfCartItems = items.reduce((curNumber, item) => {
@@ -36,17 +36,19 @@ const HeaderCartButton = (props) => {
   }, [items]); //use items as a dependency so whenever items change useEffect will run and button animate
 
   return (
-    <button className={btnClasses} onClick={props.onClick}>
-      <span className={classes.icon}>
-        <CartIcon />
-      </span>
-      <span>Cart</span>
-      <span className={classes.badge}>{numberOfCartItems}</span>
-      <br />
-      {!cartIsValid && (
-        <span className={classes.warning}>Limit can't exceed 20</span>
-      )}
-    </button>
+    <Link to="/cart">
+      <button className={btnClasses} onClick={props.onClick}>
+        <span className={classes.icon}>
+          <CartIcon />
+        </span>
+        <span>Cart</span>
+        <span className={classes.badge}>{numberOfCartItems}</span>
+        <br />
+        {!cartIsValid && (
+          <span className={classes.warning}>Limit can't exceed 20</span>
+        )}
+      </button>
+    </Link>
   );
 };
 

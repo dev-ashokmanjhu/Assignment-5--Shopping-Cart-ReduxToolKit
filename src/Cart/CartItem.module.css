@@ -16,7 +16,7 @@
 }
 .cartItemImg {
   width: 70%;
-  height: 80px;
+  height: 120px;
   object-fit: cover;
 }
 .summary {
@@ -44,12 +44,6 @@
   flex-direction: column;
 }
 
-@media (min-width: 768px) {
-  .actions {
-    flex-direction: row;
-  }
-}
-
 .cart-item button {
   font: inherit;
   font-weight: bold;
@@ -69,4 +63,14 @@
 .cart-item button:active {
   background-color: #007cb6;
   color: white;
+}
+
+.removeBtn {
+  width: auto !important;
+  border: 1px solid red !important;
+  color: red !important;
+}
+.removeBtn:hover {
+  color: white !important;
+  background-color: red !important;
 }

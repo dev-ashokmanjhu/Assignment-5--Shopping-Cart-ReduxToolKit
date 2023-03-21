@@ -25,6 +25,8 @@
 .description {
   font-style: italic;
   text-align: center;
+  min-height: 46.4px;
+  padding: 4px;
 }
 
 .price {

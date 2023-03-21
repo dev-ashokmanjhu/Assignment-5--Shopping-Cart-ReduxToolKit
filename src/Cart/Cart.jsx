@@ -1,12 +1,11 @@
-import Modal from "../Layout/Modal";
 import CartItem from "./CartItem";
 import classes from "./Cart.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../store/cartSlice";
+import { Link } from "react-router-dom";
 
 const Cart = (props) => {
   const dispatch = useDispatch();
-  // getting Context data
   const cartRedux = useSelector((state) => state.cart);
   // making total amount to last two decimal numbers
   const totalAmount = `$${cartRedux.totalAmount.toFixed(2)}`;
@@ -19,6 +18,9 @@ const Cart = (props) => {
   // function for removing item which get id as argument and redirect to cotext action
   const cartItemRemoveHandler = (id) => {
     dispatch(cartActions.removeFromCart(id));
+  };
+  const removeCartItemHandler = (id) => {
+    dispatch(cartActions.removeCartItem(id));
   };
   // function for adding Item which get item as argument and redirect to addItem context action and only increase 1 quantity
   const cartItemAddHandler = (item) => {
@@ -40,6 +42,7 @@ const Cart = (props) => {
           img={item.image}
           onRemove={cartItemRemoveHandler.bind(null, item.id)}
           onAdd={cartItemAddHandler.bind(null, item)}
+          onRemoveFromCart={removeCartItemHandler.bind(null, item.id)}
         />
       ))}
     </ul>
@@ -47,27 +50,36 @@ const Cart = (props) => {
 
   // wrap it in Modal for making overlay
   return (
-    <Modal onClose={props.onClose}>
+    <div className={classes.cartContainer}>
       {cartItems}
-      <div className={classes.total}>
-        <span>Total Amount</span>
-        <span>{totalAmount}</span>
+      <div className={classes.box2}>
+        <div className={classes.total}>
+          <span>Total Amount :</span>
+          <span>{totalAmount}</span>
+        </div>
+        <div className={classes.actions}>
+          {!(numberOfCartItems === 0) && (
+            <button
+              className={classes["button--alt"]}
+              onClick={resetItemsHandler}
+            >
+              Reset
+            </button>
+          )}
+          {numberOfCartItems === 0 && (
+            <Link to="/">
+              <button
+                className={classes["button--alt"]}
+                onClick={props.onClose}
+              >
+                Home
+              </button>
+            </Link>
+          )}
+          {hasItems && <button className={classes.button}>Order</button>}
+        </div>
       </div>
-      <div className={classes.actions}>
-        {!(numberOfCartItems === 0) && (
-          <button
-            className={classes["button--alt"]}
-            onClick={resetItemsHandler}
-          >
-            Reset
-          </button>
-        )}
-        <button className={classes["button--alt"]} onClick={props.onClose}>
-          Close
-        </button>
-        {hasItems && <button className={classes.button}>Order</button>}
-      </div>
-    </Modal>
+    </div>
   );
 };
 
