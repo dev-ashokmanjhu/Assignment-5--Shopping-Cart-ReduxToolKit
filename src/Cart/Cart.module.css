@@ -64,3 +64,9 @@
   background-color: #007cb6;
   color: white;
 }
+.cartEmpty {
+  background: white;
+  width: 60%;
+  margin: 0;
+  text-align: center;
+}

@@ -51,7 +51,11 @@ const Cart = (props) => {
   // wrap it in Modal for making overlay
   return (
     <div className={classes.cartContainer}>
-      {cartItems}
+      {numberOfCartItems === 0 ? (
+        <h1 className={classes.cartEmpty}>Cart is Empty!!</h1>
+      ) : (
+        cartItems
+      )}
       <div className={classes.box2}>
         <div className={classes.total}>
           <span>Total Amount :</span>
@@ -72,7 +76,7 @@ const Cart = (props) => {
                 className={classes["button--alt"]}
                 onClick={props.onClose}
               >
-                Home
+                Add Some Items
               </button>
             </Link>
           )}
