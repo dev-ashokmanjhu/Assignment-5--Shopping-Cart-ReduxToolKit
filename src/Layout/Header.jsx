@@ -7,7 +7,7 @@ const Header = (props) => {
     <>
       <header className={classes.header}>
         <Link to="/">
-          <h1>Assignment 4</h1>
+          <h1>Assignment 5</h1>
         </Link>
         <HeaderCartButton onClick={props.onShowCart} />
       </header>
