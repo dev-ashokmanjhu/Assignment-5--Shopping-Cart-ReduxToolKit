@@ -106,6 +106,13 @@ const cartSlice = createSlice({
     },
     removeCartItem(state, action) {
       const id = action.payload;
+      const existingCartItemIndex = state.items.findIndex(
+        (item) => item.id === id
+      );
+      const existingItem = state.items[existingCartItemIndex];
+      // updating the total amount however it exist or not in cart
+      state.totalAmount =
+        state.totalAmount - existingItem.price * existingItem.quantity;
       state.items = state.items.filter((item) => item.id !== id);
     },
     removeFromCart(state, action) {
