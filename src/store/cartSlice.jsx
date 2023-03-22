@@ -114,6 +114,12 @@ const cartSlice = createSlice({
       state.totalAmount =
         state.totalAmount - existingItem.price * existingItem.quantity;
       state.items = state.items.filter((item) => item.id !== id);
+      const numberOfitems = state.items.reduce((curNumber, item) => {
+        return curNumber + item.quantity;
+      }, 0);
+      if (numberOfitems <= 20) {
+        state.cartIsValid = true;
+      }
     },
     removeFromCart(state, action) {
       const id = action.payload;
